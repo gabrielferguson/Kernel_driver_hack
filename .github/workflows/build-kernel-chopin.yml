@@ -44,7 +44,7 @@ jobs:
           echo "kernel_source already prepared"
         else
           rm -rf kernel_source
-          git clone --depth=1 https://github.com/SMlc666/android_kernel_chopin_android_T -b T kernel_source
+          git clone --depth=1 https://github.com/LineageOS/android_kernel_google_msm-4.14 -b lineage-17.1 kernel_source
         fi
 
     - name: Ensure Toolchain
@@ -76,7 +76,7 @@ jobs:
         grep -q 'obj-$(CONFIG_KERNEL_HACK) += hack/' drivers/Makefile || echo 'obj-$(CONFIG_KERNEL_HACK) += hack/' >> drivers/Makefile
 
         # Configure the kernel
-        make O=out ARCH=arm64 CC=clang CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=aarch64-linux-gnu- chopin_user_defconfig
+        make O=out ARCH=arm64 CC=clang CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=aarch64-linux-gnu- floral_defconfig
 
         # Enable the module config
         scripts/config --file out/.config --enable CONFIG_KERNEL_HACK
